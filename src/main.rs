@@ -3,6 +3,7 @@
 mod commands;
 
 use poise::serenity_prelude as serenity;
+use ::serenity::all::UserId;
 use std::{
     env::var,
     sync::Arc,
@@ -102,8 +103,12 @@ async fn main() {
         .setup(move |ctx, _ready, framework| {
             Box::pin(async move {
                 println!("Logged in as {}", _ready.user.name);
-                // poise::builtins::register_globally(ctx, &framework.options().commands).await?;
-                poise::builtins::register_in_guild(ctx, &framework.options().commands, serenity::GuildId::new(1060949240546857000)).await?;
+                // Test bot should register in test guild, production bot should register everywhere
+                if _ready.user.id == UserId::new(1487906762920300634) {
+                    poise::builtins::register_in_guild(ctx, &framework.options().commands, serenity::GuildId::new(1060949240546857000)).await?;
+                } else {
+                    poise::builtins::register_globally(ctx, &framework.options().commands).await?;
+                }
                 Ok(Data {})
             })
         })
