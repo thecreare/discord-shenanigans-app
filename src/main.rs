@@ -47,8 +47,6 @@ async fn main() {
     let options = poise::FrameworkOptions {
         commands: vec![
             commands::help(),
-            commands::vote(),
-            commands::getvotes(),
             commands::embed_builder(),
             commands::register(),
             commands::split_md_file(),
