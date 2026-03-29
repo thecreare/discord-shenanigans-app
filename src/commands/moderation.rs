@@ -12,15 +12,14 @@ const REPORTS_CHANNEL: ChannelId = ChannelId::new(1487663981341573240);
 )]
 pub async fn report_context(ctx: Context<'_>, msg: Message) -> Result<(), Error> {
     if msg.author.id == ctx.author().id {
-        ctx.reply("Reporting yourself seems like a bad idea...").await?;
+        ctx.send(CreateReply::default().ephemeral(true).content("Reporting yourself seems like a bad idea...")).await?;
         return Ok(());
     }
 
     if msg.author.id == ctx.framework().bot_id {
-        ctx.reply("Why would you want to report our glorious bot overlord?").await?;
+        ctx.send(CreateReply::default().ephemeral(true).content("I can't believe you would try to report me :(")).await?;
         return Ok(());
     }
-    
 
     msg.channel_id.send_message(ctx, CreateMessage::new()
         .content("This message has been reported, a moderator will take a look at it when they get a chance.".to_owned()
