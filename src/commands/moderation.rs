@@ -1,5 +1,5 @@
 use poise::CreateReply;
-use serenity::all::{ChannelId, CreateAllowedMentions, CreateEmbed, CreateMessage, Message, MessageReference, MessageReferenceKind};
+use serenity::all::{ChannelId, CreateAllowedMentions, CreateMessage, Message, MessageReference, MessageReferenceKind};
 
 use crate::{Context, Error};
 

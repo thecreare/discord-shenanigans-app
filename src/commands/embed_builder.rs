@@ -1,5 +1,5 @@
 use poise::{CreateReply, Modal};
-use serenity::all::{ButtonStyle, ComponentInteractionCollector, CreateActionRow, CreateAllowedMentions, CreateAttachment, CreateButton, CreateEmbed, CreateEmbedFooter, CreateMessage, Timestamp};
+use serenity::all::{ButtonStyle, ComponentInteractionCollector, CreateActionRow, CreateAllowedMentions, CreateButton, CreateEmbed, CreateEmbedFooter};
 
 use crate::{Context, Error};
 

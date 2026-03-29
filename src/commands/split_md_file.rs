@@ -1,7 +1,5 @@
-use std::str::from_utf8;
-
-use poise::{CreateReply, Modal};
-use serenity::all::{Attachment, ButtonStyle, ComponentInteractionCollector, CreateActionRow, CreateAllowedMentions, CreateAttachment, CreateButton, CreateEmbed, CreateEmbedFooter, CreateMessage, Timestamp};
+use poise::CreateReply;
+use serenity::all::{Attachment, CreateEmbed};
 
 use crate::{Context, Error};
 

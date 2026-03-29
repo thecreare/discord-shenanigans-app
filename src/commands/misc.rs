@@ -1,6 +1,3 @@
-use poise::CreateReply;
-use serenity::all::{CreateAllowedMentions, CreateAttachment, CreateEmbed, CreateEmbedFooter, CreateMessage, Timestamp};
-
 use crate::{Context, Error};
 
 /// Show this help menu
