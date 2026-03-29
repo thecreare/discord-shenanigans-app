@@ -4,9 +4,8 @@ mod commands;
 
 use poise::serenity_prelude as serenity;
 use std::{
-    collections::HashMap,
     env::var,
-    sync::{Arc, Mutex},
+    sync::Arc,
     time::Duration,
 };
 use dotenvy::dotenv;
@@ -16,9 +15,7 @@ type Error = Box<dyn std::error::Error + Send + Sync>;
 type Context<'a> = poise::Context<'a, Data, Error>;
 
 // Custom user data passed to all command functions
-pub struct Data {
-    votes: Mutex<HashMap<String, u32>>,
-}
+pub struct Data {}
 
 async fn on_error(error: poise::FrameworkError<'_, Data, Error>) {
     // This is our custom error handler
@@ -107,9 +104,7 @@ async fn main() {
                 println!("Logged in as {}", _ready.user.name);
                 // poise::builtins::register_globally(ctx, &framework.options().commands).await?;
                 poise::builtins::register_in_guild(ctx, &framework.options().commands, serenity::GuildId::new(1060949240546857000)).await?;
-                Ok(Data {
-                    votes: Mutex::new(HashMap::new()),
-                })
+                Ok(Data {})
             })
         })
         .options(options)
