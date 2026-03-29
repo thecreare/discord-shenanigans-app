@@ -7,8 +7,8 @@ const REPORTS_CHANNEL: ChannelId = ChannelId::new(1487663981341573240);
 
 #[poise::command(
     context_menu_command = "Report",
-    // install_context = "Guild",
-    // interaction_context = "Guild"
+    install_context = "Guild",
+    interaction_context = "Guild"
 )]
 pub async fn report_context(ctx: Context<'_>, msg: Message) -> Result<(), Error> {
     if msg.author.id == ctx.author().id {
