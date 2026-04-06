@@ -48,7 +48,7 @@ async fn main() {
             commands::embed_builder(),
             commands::register(),
             commands::split_md_file(),
-            commands::report_context(),
+            commands::report_context::report_context(),
         ],
         prefix_options: poise::PrefixFrameworkOptions {
             prefix: Some("~".into()),
