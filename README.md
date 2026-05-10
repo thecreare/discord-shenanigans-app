@@ -1,3 +1,3 @@
 # Enactor of Shenanigans
 
-Generic utility bot for discord. Does my bidding.
+Opinionated moderation & utility bot made for (and currently hardcoded for) the Evolve 3D server.
