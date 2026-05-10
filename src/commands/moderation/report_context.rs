@@ -1,6 +1,7 @@
 use std::collections::HashSet;
 
 use poise::CreateReply;
+use scopeguard::defer;
 use serenity::all::{ButtonStyle, ChannelId, ComponentInteractionCollector, CreateActionRow, CreateAllowedMentions, CreateButton, CreateInteractionResponseMessage, CreateMessage, EditMessage, Mentionable, Message, MessageReference, MessageReferenceKind, UserId};
 
 use crate::{Context, Error};
@@ -37,7 +38,9 @@ pub async fn report_context(ctx: Context<'_>, msg: Message) -> Result<(), Error>
         return Ok(());
     }
     ctx.data().reported_messages.lock().unwrap().insert(msg.id);
-
+    defer! {
+        ctx.data().reported_messages.lock().unwrap().remove(&msg.id);
+    }
 
     let mut report_header = REPORTS_CHANNEL.send_message(ctx, CreateMessage::new()
         .content(get_report_header(&ctx, &msg, None))
