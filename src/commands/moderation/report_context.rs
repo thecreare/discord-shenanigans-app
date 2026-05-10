@@ -18,7 +18,8 @@ fn get_report_header(ctx: &Context<'_>, msg: &Message, corroborators: Option<&Ha
 #[poise::command(
     context_menu_command = "Report",
     install_context = "Guild",
-    interaction_context = "Guild"
+    interaction_context = "Guild",
+    member_cooldown = 30,
 )]
 pub async fn report_context(ctx: Context<'_>, msg: Message) -> Result<(), Error> {
     if msg.author.id == ctx.author().id {
