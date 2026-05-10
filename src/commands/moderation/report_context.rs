@@ -32,6 +32,13 @@ pub async fn report_context(ctx: Context<'_>, msg: Message) -> Result<(), Error>
         return Ok(());
     }
 
+    if ctx.data().reported_messages.lock().unwrap().contains(&msg.id) {
+        ctx.send(CreateReply::default().ephemeral(true).content("This message has already been reported. Try pressing \"I agree with this report\" instead")).await?;
+        return Ok(());
+    }
+    ctx.data().reported_messages.lock().unwrap().insert(msg.id);
+
+
     let mut report_header = REPORTS_CHANNEL.send_message(ctx, CreateMessage::new()
         .content(get_report_header(&ctx, &msg, None))
         .allowed_mentions(CreateAllowedMentions::new())

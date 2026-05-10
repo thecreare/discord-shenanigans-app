@@ -3,11 +3,9 @@
 mod commands;
 
 use poise::serenity_prelude as serenity;
-use ::serenity::all::UserId;
+use ::serenity::{all::UserId, model::id::MessageId};
 use std::{
-    env::var,
-    sync::Arc,
-    time::Duration,
+    collections::HashSet, env::var, sync::{Arc, Mutex}, time::Duration
 };
 use dotenvy::dotenv;
 
@@ -16,7 +14,10 @@ type Error = Box<dyn std::error::Error + Send + Sync>;
 type Context<'a> = poise::Context<'a, Data, Error>;
 
 // Custom user data passed to all command functions
-pub struct Data {}
+#[derive(Default)]
+pub struct Data {
+    reported_messages: Mutex<HashSet<MessageId>>,
+}
 
 async fn on_error(error: poise::FrameworkError<'_, Data, Error>) {
     // This is our custom error handler
@@ -109,7 +110,7 @@ async fn main() {
                 } else {
                     poise::builtins::register_globally(ctx, &framework.options().commands).await?;
                 }
-                Ok(Data {})
+                Ok(Data::default())
             })
         })
         .options(options)
